@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 # ----------------------------------------------------------------#
+# Matthew Miller						  #
+# IT240-452							  #
+# Final Project							  #
+#-----------------------------------------------------------------#
 # Comments: 							  #
 #	1. File must be chmod +x for the script to loop properly  #
 # --------------------------------------------------------------- #
@@ -260,7 +264,15 @@ read logOption
 		echo "Log Monitor for "$logFile" ";
 		echo "----------------------------------------------";
 		echo "[Will trigger live updates from "$logFile" where pattern "$logPattern" occurs.]"
-		echo "`tail -f "$logFile" | grep $logPattern`" 
+		while true
+		do
+			if tail -f "$logFile" | grep "$logPattern"
+			then
+				echo -n "Pattern found: "
+				echo `tail -f "$logFile" | grep "$logPattern"`
+				echo " in $logFile"
+			fi 
+		done 
 
 	elif [ "$logOption" == "2" ]
 	then
@@ -300,11 +312,18 @@ read logOption
                                 fi
                 echo `clear`
                 echo "----------------------------------------------";
-                echo "Log Monitor for "$logFile" ";
+                echo "Log Monitor for "$logFile" and "$logFileTwo" ";
                 echo "----------------------------------------------";
                 echo "[Will trigger live updates from "$logFile" & "$logFileTwo" where pattern "$logPattern" occurs.]"
-                echo "`tail -f "$logFile" -f "$logFileTwo" | grep $logPattern`" 
-
+              	
+		while true
+		do
+		  if tail -f "$logFile" -f "$logFileTwo" | grep "$logPattern"
+		  then
+				echo -n "Pattern found: "
+                                echo `tail -f "$logFile" -f "$logFileTwo" | grep "$logPattern"`                        
+		  fi 
+		done
 	elif [ -z "$logOption" ]
 	then
 		echo `clear`
