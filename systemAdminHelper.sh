@@ -186,6 +186,7 @@ function backUpDir()
 
 echo "----------------------------------------------";
 echo "Directory Backup Script"
+echo "Enter absolute path: EX: /home/student/Desktop/ "
 echo "----------------------------------------------";
 echo
 echo
@@ -202,7 +203,7 @@ echo
         then
                 TIME=`date +%b-%d-%y`
                 cp -a $targetDir /home/student/Desktop/tempBackupFilesMrm36/
-                tar -czvf "$backupName"-backup-"$TIME".tar.gz /home/student/Desktop/tempBackupFilesMrm36/
+                tar -czvf "$backupName"-backup-"$TIME".tar.gz -C /home/student/Desktop/tempBackupFilesMrm36/ .
                 mv "$backupName"-backup-"$TIME".tar.gz /home/student/Desktop/backups/
                 backupFolder="$backupName"-backup-"$TIME".tar.gz
                 rm -r /home/student/Desktop/tempBackupFilesMrm36/
